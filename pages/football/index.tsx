@@ -28,7 +28,7 @@ const Football = ({footballs}) => {
             <h1 className={'text-white'}>List</h1>
 
                 {footballs.map(team =>
-                <div className={'text-white row'} key={team.id}>
+                <div className={'text-white row'}>
                     <Link href={`/football/${team.id}`}>
                     <a>{team.name}</a>
                     </Link>
@@ -42,13 +42,7 @@ const Football = ({footballs}) => {
 export default Football;
 
 
-// export async function getStaticProps(context) {
-//     const response = await fetch('https://jsonplaceholder.typicode.com/users')
-//     const footballs = await response.json()
-//     return {
-//         props: {footballs}, // will be passed to the page component as props
-//     }
-// }
+
 
 export const getStaticProps = async () => {
     const response = await fetch('https://jsonplaceholder.typicode.com/users');

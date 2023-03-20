@@ -1,0 +1,62 @@
+{
+  "football": {
+    "live": 14,
+    "total": 151
+  },
+  "tennis": {
+    "live": 16,
+    "total": 133
+  },
+  "basketball": {
+    "live": 10,
+    "total": 208
+  },
+  "ice-hockey": {
+    "live": 1,
+    "total": 58
+  },
+  "baseball": {
+    "live": 0,
+    "total": 8
+  },
+  "volleyball": {
+    "live": 1,
+    "total": 54
+  },
+  "handball": {
+    "live": 0,
+    "total": 62
+  },
+  "futsal": {
+    "live": 0,
+    "total": 8
+  },
+  "waterpolo": {
+    "live": 0,
+    "total": 12
+  },
+  "snooker": {
+    "live": 1,
+    "total": 19
+  },
+  "darts": {
+    "live": 0,
+    "total": 15
+  },
+  "cricket": {
+    "live": 7,
+    "total": 45
+  },
+  "bandy": {
+    "live": 0,
+    "total": 1
+  },
+  "table-tennis": {
+    "live": 5,
+    "total": 409
+  },
+  "esports": {
+    "live": 10,
+    "total": 54
+  }
+}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "proxy": "http://localhost:3000",
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 3001",
     "build": "env-cmd -f .env.dev next build",
     "build:prod": "env-cmd -f .env.production next build",
     "start": "next start",

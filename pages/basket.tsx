@@ -16,7 +16,7 @@ import Head from "next/head";
 // }
 
 
-const Basketball = () => {
+const Basket = () => {
     return (
 
         <>
@@ -298,5 +298,5 @@ const Basketball = () => {
     )
 }
 
-export default Basketball;
+export default Basket;
 

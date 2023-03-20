@@ -1,10 +1,37 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import {GetServerSideProps} from "next";
+import {type} from "os";
 
-const Header = ({children, keywords, data})=>{
 
+type data = {
+    uuid: string;
+    name: string;
+    collection: string;
+    pagination: any;
+    id: any;
+    current_page: number;
+    participant_1: any;
+    active: boolean;
+    league_url: string;
+    start_date: number;
+    league_uuid: string;
+};
+
+
+
+
+const Header = ({children, keywords, data, props})=>{
+
+    const [value, setValue] = useState();
+
+    console.log('select value: gmt', value)
+
+    function handleChange(event) {
+        setValue(event.target.value);
+    }
         return (
             <>
                 <Head>
@@ -34,20 +61,19 @@ const Header = ({children, keywords, data})=>{
                                     </input>
 
                                 </form>
-
-
+                                &nbsp;
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li className="client_time dropdown">
-                                        <Link href={'/'}><a className="btn btn-light dropdown-toggle" role="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">GMT +3</a></Link>
-                                        <ul className="dropdown-menu">
-                                            <li><Link href={'/'}><a className="dropdown-item" >GMT + 4</a></Link></li>
-                                            <li><Link href={'/'}><a className="dropdown-item">GMT + 2</a></Link></li>
-                                            <li><Link href={'/'}><a className="dropdown-item">GMT + 1 </a></Link></li>
-                                        </ul>
-                                    </li>
+                                    {/*<select value={value} onChange={handleChange}> выводить текст из <option>*/}
+                                    <select value={value} onChange={(event)=> setValue((event.target as any).value)}>
+                                        <option>GMT</option>
+                                        <option value="1">GMT+1</option>
+                                        <option value="2">GMT+2</option>
+                                        <option value="3">GMT+3</option>
+                                    </select>
+
+                                    &nbsp;
                                     <li>
-                                        <Link href={'/'}><a className="btn btn-light" role="button">17:00</a></Link>
+                                        <Link href={'/'}><a className="btn btn-light" role="button">{new Date().getHours() + ':' + new Date().getMinutes()}</a></Link>
                                     </li>
                                 </ul>
 
@@ -83,9 +109,10 @@ const Header = ({children, keywords, data})=>{
                                 <Link href={'/football'}><a className="nav-link">Football</a></Link>
                                 <Link href={'/basketball'}><a className="nav-link">
                                     Basketball
-                                    <span className="badge text-bg-light rounded-pill align-text-bottom">27</span>
+                                    <span className="badge text-bg-light rounded-pill align-text-bottom">{data}</span>
                                 </a></Link>
                                 <Link href={'/american_football'}><a className="nav-link">American Football</a></Link>
+                                <Link href={'/tennis'}><a className="nav-link">Tennis</a></Link>
 
                             </nav>
                         </div>
@@ -99,19 +126,31 @@ const Header = ({children, keywords, data})=>{
             </>
         );
     }
+
 export default Header;
 
-export const getStaticProps = async () => {
-    const response = await fetch('https://jokerlivestream-front-3uc7j.ondigitalocean.app/_next/data/h5bBHDPNIU4PacUUb5iuj/en/football.json?gameMatchName=football');
-    const data = await response.json();
-    //данная функция возвращяет пропсы для компонента
 
-    if (!data) {
-        return {
-            notFound:true,
-        }
-    }
+
+// export const getStaticProps = async () => {
+//     const response = await fetch('https://jokerlivestream-front-3uc7j.ondigitalocean.app/_next/data/h5bBHDPNIU4PacUUb5iuj/en/football.json?gameMatchName=football');
+//     const data = await response.json();
+//     //данная функция возвращяет пропсы для компонента
+//
+//     if (!data) {
+//         return {
+//             notFound:true,
+//         }
+//     }
+//     return {
+//         props: {header_menu: data},
+//     }
+// };
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const response = await fetch(`http://localhost:3004/collection/`)
+    const data = await response.json()
+
     return {
-        props: {header_menu: data},
+        props: {data},
     }
-};
+}

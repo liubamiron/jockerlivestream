@@ -1,5 +1,6 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {GetServerSideProps} from "next";
 
 // import A from '../components/A';
 
@@ -12,7 +13,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // }
 
 
-const Index = () => {
+const Index = ({data}) => {
+    console.log('d', data.length)
     return (
             <main className="container">
                 <button type="button" className="btn btn-dark live_streams_button">LIVE STREAMS</button>
@@ -38,3 +40,10 @@ const Index = () => {
 
 export default Index;
 
+export const getServerSideProps: GetServerSideProps = async () => {
+    const response = await fetch(`http://localhost:3004/collection/`)
+    const data = await response.json()
+    return {
+        props: {data},
+    }
+}
